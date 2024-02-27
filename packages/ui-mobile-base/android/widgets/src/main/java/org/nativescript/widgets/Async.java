@@ -539,7 +539,7 @@ public class Async {
                     }
 
                     // Do not attempt to write the content (body) for DELETE method, Java will throw directly
-                    if (!requestMethod.equals(DELETE_METHOD)) {
+                    if (!DELETE_METHOD.equals(requestMethod)) {
                         options.writeContent(connection, openedStreams);
                     }
 
@@ -554,7 +554,7 @@ public class Async {
                     result.url = options.url;
                     result.statusCode = connection.getResponseCode();
                     result.statusText = connection.getResponseMessage();
-                    if (!requestMethod.equals(HEAD_METHOD)) {
+                    if (!HEAD_METHOD.equals(requestMethod)) {
                         result.readResponseStream(connection, openedStreams, options);
                     }
 
