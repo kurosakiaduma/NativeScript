@@ -2,6 +2,7 @@ package org.nativescript;
 
 import android.os.SystemClock;
 import android.util.Log;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +24,7 @@ public class Process {
             final BufferedReader reader = new BufferedReader(new FileReader(path));
             final String stat;
             try {
-                stat = reader.readLine();
+                stat = BoundedLineReader.readLine(reader, 5_000_000);
             } finally {
                 reader.close();
             }
