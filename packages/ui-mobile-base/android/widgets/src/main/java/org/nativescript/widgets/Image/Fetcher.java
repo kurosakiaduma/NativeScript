@@ -26,6 +26,8 @@ import android.media.ExifInterface;
 import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -293,7 +295,7 @@ public class Fetcher extends Worker {
         BufferedInputStream in = null;
 
         try {
-            final URL url = new URL(urlString);
+            final URL url = Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             urlConnection = (HttpURLConnection) url.openConnection();
             in = new BufferedInputStream(urlConnection.getInputStream(), IO_BUFFER_SIZE);
             out = new BufferedOutputStream(outputStream, IO_BUFFER_SIZE);
