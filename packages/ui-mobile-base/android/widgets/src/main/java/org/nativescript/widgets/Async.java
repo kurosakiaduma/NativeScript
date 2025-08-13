@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Base64;
 import android.util.Log;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -517,7 +519,7 @@ public class Async {
 
                 try {
                     RequestOptions options = params[0];
-                    URL url = new URL(options.url);
+                    URL url = Urls.create(options.url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
                     // set the request method
